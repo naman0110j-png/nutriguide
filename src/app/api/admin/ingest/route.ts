@@ -28,5 +28,16 @@ export const POST = route("admin_ingest", async (req: Request) => {
     return json({ discovered: urls.length, not_in_catalogue: urls.filter((u) => !known.has(u.replace(/\/+$/, ""))) });
   }
   const r = await refresh(repo, deps, body);
-  return json({ ...r, results: r.results.map((x) => ({ id: x.id, url: x.url, status: x.status, error: x.error, diff: x.diff.map((d) => d.field) })) });
+  return json({ ...r, results: r.results.map((x) => ({
+      id: x.id,
+      url: x.url,
+      status: x.status,
+      error: x.error,
+      missing_on_page: x.missing_fields,
+      // Full diff so reviewers can see values immediately, even where staged storage is ephemeral (demo mode on serverless).
+      diff: x.diff.map((d) => ({ field: d.field, critical: d.critical, approved_value: d.previous, newly_extracted_unreviewed: d.next })),
+      note: x.diff.some((d) => d.field === "ingredients" && typeof d.previous === "string" && d.previous.startsWith("("))
+        ? "The page now provides a fuller ingredient list than the partial list on record. Review it before approving."
+        : null,
+    })) });
 });
