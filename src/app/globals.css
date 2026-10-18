@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body { @apply bg-ivory text-ink font-sans antialiased; font-feature-settings: "ss01"; }
+  h1, h2, h3 { @apply font-display text-ink; letter-spacing: -0.01em; }
+  h1 { font-variation-settings: "opsz" 96, "SOFT" 50; }
+  a { @apply text-sage-700 underline-offset-2; }
+  a:hover { @apply underline; }
+  :focus-visible { @apply outline-none ring-2 ring-mist-600 ring-offset-2 ring-offset-ivory; }
+  ::selection { @apply bg-sage-200; }
+}
+
+@layer components {
+  .card { @apply rounded-2xl border border-ivory-300/80 bg-ivory-50 shadow-soft; }
+  .card-pad { @apply p-5 sm:p-6; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 no-underline hover:no-underline; }
+  .btn-primary { @apply btn bg-sage-700 text-white hover:bg-sage-800; }
+  .btn-secondary { @apply btn border border-sage-600/40 bg-transparent text-sage-800 hover:bg-sage-50; }
+  .btn-ghost { @apply btn px-3 text-ink-soft hover:bg-ivory-200; }
+  .btn-danger { @apply btn border border-clay-600/40 text-clay-700 hover:bg-clay-50; }
+  .label { @apply block text-sm font-medium text-ink; }
+  .hint { @apply mt-1 text-xs text-ink-faint; }
+  .input { @apply mt-1.5 block w-full rounded-xl border border-ivory-300 bg-white px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-mist-600 focus:outline-none focus:ring-2 focus:ring-mist-300/50; }
+  .chip { @apply inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.14em] text-sage-700; }
+  .prose-sm p + p { @apply mt-2; }
+}

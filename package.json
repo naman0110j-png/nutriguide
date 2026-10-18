@@ -1,0 +1,47 @@
+{
+  "name": "little-joys-nutriguide",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Parent-facing child nutrition education and product-use assistant (independent prototype, not affiliated with Mosaic Wellness).",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:seed-sql": "tsx scripts/generate-seed-sql.ts",
+    "db:test-migrations": "tsx scripts/test-migrations.ts",
+    "e2e": "node scripts/e2e.mjs",
+    "e2e:api": "node scripts/e2e-api.mjs"
+  },
+  "engines": {
+    "node": ">=18.18"
+  },
+  "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@supabase/supabase-js": "^2.118.0",
+    "next": "^14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "server-only": "^0.0.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.2.17",
+    "@types/node": "^20.17.6",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.35",
+    "playwright-core": "^1.48.2",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.19",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.9"
+  }
+}
