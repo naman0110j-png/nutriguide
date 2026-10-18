@@ -7,3 +7,6 @@ coverage
 *.tsbuildinfo
 test-results
 e2e-screenshots
+
+.vercel
+.vercel
