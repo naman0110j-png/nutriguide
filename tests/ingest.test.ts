@@ -77,6 +77,15 @@ describe("extraction", () => {
     expect(ex.ingredients_text).toMatch(/Groundnut Oil/);
     expect(ex.ingredients_text).toMatch(/Skim Milk Powder/);
   });
+  it("ignores a 'View Full List of Ingredients' link and non-list text (live-page false positive)", () => {
+    const html = `<html><body><div>2-6 Yr</div><a href="#">View Full List of Ingredients</a>
+      <h2>Questions you should be asking. Answers that we believe must be heard.</h2>
+      <h3>How to prepare 1 serving of Nutrimix?</h3><p>Mix 2 scoops (30 g) of the nutrition powder with 200 ml of lukewarm or cold milk to prepare 1 serving of Nutrimix.</p></body></html>`;
+    const ex = extractProductPage(html, NM);
+    expect(ex.ingredients_text).toBeNull();
+    expect(ex.instructions_text).toMatch(/2 scoops/);
+  });
+
   it("parses age labels and sitemaps", () => {
     expect(parseAge("5+ Yr")).toEqual({ min: 60, max: null });
     expect(parseAge("7–12 Yr")).toEqual({ min: 84, max: 155 });

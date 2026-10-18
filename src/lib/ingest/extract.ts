@@ -75,9 +75,13 @@ export function extractProductPage(html: string, url: string): ExtractedProduct 
   }
 
   // Ingredients: the paragraph after a "List of Ingredients" heading.
+  // Ignore "View Full List of Ingredients" links/buttons, and only accept text that looks like
+  // an ingredient list (several comma/semicolon-separated items, not a question or heading).
   let ingredients: string | null = null;
-  const ing = text.match(/List of Ingredients\s*\n?\s*([^\n]{10,1200})/i);
-  if (ing) ingredients = ing[1].trim();
+  for (const m of text.matchAll(/(View\s+(?:the\s+)?Full\s+)?List of Ingredients\s*:?\s*\n?\s*([^\n]{10,1200})/gi)) {
+    if (m[1]) continue;
+    if (looksLikeIngredientList(m[2])) { ingredients = m[2].trim(); break; }
+  }
 
   let jsonLdName: string | null = null;
   for (const m of html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
@@ -104,6 +108,13 @@ export function extractProductPage(html: string, url: string): ExtractedProduct 
     json_ld_name: jsonLdName,
     price_inr: price,
   };
+}
+
+export function looksLikeIngredientList(t: string): boolean {
+  const s = t.trim();
+  if (/\?\s*$/.test(s)) return false;
+  const items = s.split(/[,;]/).map((x) => x.trim()).filter((x) => x.length > 1);
+  return items.length >= 3;
 }
 
 export function parseSitemap(xml: string): { kind: "index" | "urlset"; locs: string[] } {
