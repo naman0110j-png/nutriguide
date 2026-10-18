@@ -1,5 +1,5 @@
 # Little Joys NutriGuide (working name)
-
+   **Live demo:** https://nutriguide-roan.vercel.app
 A parent-facing, educational child-nutrition and product-use assistant. Parents build a short profile; the app produces a plain-language overview, practical food ideas that pass deterministic age / diet / allergy checks, the **verbatim official instructions** for products they already use, and clear statements of what it *cannot* determine.
 
 > **Independent prototype.** Inspired by the Little Joys range (Mosaic Wellness). **Not affiliated with or endorsed by Mosaic Wellness or Little Joys.** It does not diagnose, treat or prescribe. Nothing in the dataset has been reviewed by a nutrition professional.
