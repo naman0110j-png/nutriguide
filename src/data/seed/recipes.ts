@@ -26,7 +26,7 @@ export const RECIPES: Recipe[] = [
     age_max_months: 83,
     meal_types: ["drink", "breakfast", "snack"],
     ingredients: [
-      { name: "Little Joys Nutrimix 2–6 (Chocolate)", quantity: "1 serving, prepared exactly as the pack says", unit: "", allergens: ["tree_nut"], diet_flags: [], optional: false, product_id: "lj-nutrimix-2-6-chocolate-350g" },
+      { name: "Little Joys Nutrimix 2–6 (Chocolate)", quantity: "1 serving, prepared exactly as the pack says", unit: "", allergens: ["tree_nut", "milk"], diet_flags: [], optional: false, product_id: "lj-nutrimix-2-6-chocolate-350g" },
       { name: "Cold milk (as used in the pack instruction)", quantity: "200", unit: "ml", allergens: ["milk"], diet_flags: ["dairy"], optional: false },
       { name: "Ripe banana", quantity: "½", unit: "", allergens: [], diet_flags: [], optional: false },
     ],
@@ -68,7 +68,7 @@ export const RECIPES: Recipe[] = [
     ingredients: [
       { name: "Rolled oats", quantity: "3", unit: "tbsp", allergens: ["gluten"], diet_flags: [], optional: false },
       { name: "Milk", quantity: "200", unit: "ml", allergens: ["milk"], diet_flags: ["dairy"], optional: false },
-      { name: "Little Joys Nutrimix 2–6 (Chocolate)", quantity: "2 scoops (30 g) — one pack serving", unit: "", allergens: ["tree_nut"], diet_flags: [], optional: false, product_id: "lj-nutrimix-2-6-chocolate-350g" },
+      { name: "Little Joys Nutrimix 2–6 (Chocolate)", quantity: "2 scoops (30 g) — one pack serving", unit: "", allergens: ["tree_nut", "milk"], diet_flags: [], optional: false, product_id: "lj-nutrimix-2-6-chocolate-350g" },
       { name: "Finely ground almonds or walnuts", quantity: "1", unit: "tsp", allergens: ["tree_nut"], diet_flags: [], optional: true },
     ],
     preparation_steps: [

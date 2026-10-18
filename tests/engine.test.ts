@@ -78,9 +78,9 @@ describe("allergen safeguards", () => {
 
   it("incomplete ingredient data prevents any safety claim for an allergic child", () => {
     const k = kb();
-    const nutrimix = k.products.find((p) => p.id === NUTRIMIX_2_6)!;
+    const gummies = k.products.find((p) => p.id === "lj-calcium-gummies-strawberry-4-6-30n")!; // partial ingredient list
     const ctx = allergyContext(profile({ no_known_allergies: false, allergies: [{ allergen: "sesame", kind: "allergy", source: "parent_reported" }] }));
-    const check = productAllergenCheck(nutrimix, ctx);
+    const check = productAllergenCheck(gummies, ctx);
     expect(check.status).toBe("cannot_confirm");
     expect(check.message).not.toMatch(/safe/i);
   });
@@ -104,10 +104,23 @@ describe("allergen safeguards", () => {
   });
 
   it("product-linked recipes are excluded for allergic children when product data is incomplete", () => {
+    const k = kb();
+    k.products.find((x) => x.id === NUTRIMIX_2_6)!.ingredients.completeness = "partial"; // simulate an incomplete record
     const p = profile({ ...ownsNutrimix, no_known_allergies: false, allergies: [{ allergen: "sesame", kind: "allergy", source: "parent_reported" }] });
-    const r = recommend(p, { concern: "product_question", contentMode: "demo" }, kb());
+    const r = recommend(p, { concern: "product_question", contentMode: "demo" }, k);
     expect(ids(r)).not.toContain("nutrimix-banana-smoothie");
     expect(r.excluded.find((e) => e.recipe_id === "nutrimix-banana-smoothie")?.reason).toMatch(/incomplete/);
+  });
+
+  it("with the full Nutrimix list, a sesame-allergic child can see Nutrimix ideas; a milk-allergic child cannot", () => {
+    const sesame = profile({ ...ownsNutrimix, no_known_allergies: false, allergies: [{ allergen: "sesame", kind: "allergy", source: "parent_reported" }] });
+    const r1 = recommend(sesame, { concern: "product_question", contentMode: "demo" }, kb());
+    expect(ids(r1)).toContain("nutrimix-banana-smoothie");
+    expect(r1.recipes.find((c) => c.recipe.id === "nutrimix-banana-smoothie")!.allergen_check.status).toBe("no_listed_conflict");
+    const milk = profile({ ...ownsNutrimix, no_known_allergies: false, allergies: [{ allergen: "milk", kind: "allergy", source: "parent_reported" }] });
+    const r2 = recommend(milk, { concern: "product_question", contentMode: "demo" }, kb());
+    expect(ids(r2)).not.toContain("nutrimix-banana-smoothie");
+    expect(r2.owned_products[0].allergen_check?.status).toBe("conflict");
   });
 });
 

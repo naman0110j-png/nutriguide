@@ -23,9 +23,9 @@ export const SOURCES: EvidenceSource[] = [
       "Age variant 2–6 years",
       "Preparation: 2 scoops (30 g) in 200 ml lukewarm or cold milk = 1 serving",
       "Not a meal replacement",
-      "Named ingredients incl. ragi, almond powder, walnut powder, jaggery, chicory root, bajra, jowar",
+      "Full Ingredients List (protein mix of skim milk powder & milk protein concentrate; jaggery & dates; cocoa; bajra, jowar, ragi, almond, walnut; vitamins & minerals; flavours; algal DHA; chicory root fibre; enzymes)",
     ],
-    notes: "Full ingredient list sits behind a 'View Full List of Ingredients' control and was not captured. Nutrition table is an image and was not transcribed.",
+    notes: "The full ingredient list loads only after clicking 'View Full List of Ingredients'; it was captured from the live page by the project owner on 2026-10-18. Nutrition table is an image and was not transcribed.",
   },
   {
     id: "src-lj-nutrimix-7-12",
